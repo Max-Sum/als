@@ -31,4 +31,4 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64/v8,linux/arm/v7,linux/arm/v6
           push: true
-          tags: wikihostinc/looking-glass-server:latest
+          tags: gzmaxsum/looking-glass-server:latest
