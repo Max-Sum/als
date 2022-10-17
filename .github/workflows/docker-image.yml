@@ -1,7 +1,12 @@
 name: 'docker image build'
 
 on:
-  create
+  push:
+    branches: [ "master" ]
+    # Publish semver tags as releases.
+    tags: [ 'v*.*.*' ]
+  pull_request:
+    branches: [ "master" ]
 
 jobs:
   docker:
