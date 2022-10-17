@@ -1,5 +1,5 @@
 <?php
-if (env('enable_speedtest', true)) {
+if (env('ENABLE_SPEEDTEST', true)) {
     applog('Working with speedtest static file(s)...');
 
     $speedtestFiles = [];

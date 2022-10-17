@@ -16,9 +16,9 @@ class Websocket
     {
         global $config;
         $localConfig = $config;
-        
+
         $this->request = $request;
-        
+
         $this->clientIp = $this->request->header['x-real-ip'];
         $localConfig['client_ip'] = $this->clientIp;
 
@@ -84,7 +84,7 @@ class Websocket
 
     private function doPing($ticket, $domain)
     {
-        if (!env('utilities_ping', true)) { return; }
+        if (!env('UTILITIES_PING', true)) { return; }
         $host = gethostbyname($domain);
         if ($host === false || ($host == $domain && !ip2long($domain))) {
             $this->send("1|{$ticket}|0");
@@ -119,7 +119,7 @@ class Websocket
 
     public function doTraceroute($ticket, $domain)
     {
-        if (!env('utilities_traceroute', true)) { return; }
+        if (!env('UTILITIES_TRACEROUTE', true)) { return; }
         /** @var MaxMind\Db\Reader $reader */
         global $reader;
 
@@ -240,11 +240,11 @@ class Websocket
 
     public function startIperf3($ticket)
     {
-        if (!env('utilities_iperf3', true)) { return; }
+        if (!env('UTILITIES_IPERF3', true)) { return; }
         $timeout = 60;
-        $port = rand(env('utilities_iperf3_port_min', '30000'), env('utilities_iperf3_port_max', '31000'));
+        $port = rand(env('UTILITIES_IPERF3_PORT_MIN', '30000'), env('UTILITIES_IPERF3_PORT_MAX', '31000'));
         while (in_array($port, self::$ports)) {
-            $port = rand(env('utilities_iperf3_port_min', '30000'), env('utilities_iperf3_port_max', '31000'));
+            $port = rand(env('UTILITIES_IPERF3_PORT_MIN', '30000'), env('UTILITIES_IPERF3_PORT_MAX', '31000'));
             sleep(.1);
         }
         self::$ports[] = $port;
